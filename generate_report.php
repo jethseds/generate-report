@@ -51,13 +51,15 @@
                 <div class="container">
                   <div class="controls">
                     <select name="chartType" id="chartType" onchange="updateChartType()">
-                      <option value="line">Line</option>
+
+         <option value="doughnut">Doughnut</option>
                       <option value="bar">Bar</option>
                       <option value="radar">Radar</option>
-                      <option value="polarArea">Polar Area</option>
-                      <option value="doughnut">Doughnut</option>
+
+                    
+
                     </select>
-                    <button onclick="randomizeData()">Randomize Data!</button>
+    <!--                 <button onclick="randomizeData()">Randomize Data!</button> -->
                   </div>
                   <div class="col-lg-10">
                     <canvas id="myChart" width="600" height="400"></canvas>
@@ -94,51 +96,114 @@
     // Define data set for all charts
 let dataBaby = [0, 0];
 let dataBaby2 = [0, 0];
+
+
 myData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Male", "Female"],
         datasets: [
           {
-            label: "Data, baby!",
+            label: "Male",
             fill: false,
-            backgroundColor: 'rgb(190, 99, 255, 0.25)',
+            backgroundColor: '#E74C3C',
             borderColor: 'rgb(190, 99, 255)',
             data: dataBaby,
           }, {
-            label: "Data, baby!2",
+            label: "Female",
             fill: false,
-            backgroundColor: 'rgb(190, 99, 255, 0.25)',
+            backgroundColor: '#26B99A',
             borderColor: 'rgb(190, 99, 255)',
             data: dataBaby2,
           }]
     };
 
+
+myData2 = {
+        labels: ["Item", "Contractual","Daily wage"],
+        datasets: [
+          {
+            label: "College of Information and Computing Science",
+            fill: false,
+            backgroundColor: 'rgba(200,0,0,0.2)',
+            borderColor: 'rgb(190, 99, 255)',
+            data: dataBaby,
+          }, {
+            label: "College of Hotel and Restaurant",
+            fill: false,
+            backgroundColor: 'rgba(0,0,200,0.2)',
+            borderColor: 'rgb(190, 99, 255)',
+            data: dataBaby2,
+          }]
+    };
+
+myData3 = {
+
+        labels: ['Elementary Graduate', 'Junior High Graduate', 'Senior High Graduate', 'College Graduate', 'Masteral', 'Doctorate'],
+        datasets: [
+          {
+            label: "High Educational Attainment",
+            fill: false,
+            backgroundColor: '#000080',
+            borderColor: 'rgb(190, 99, 255)',
+            data: dataBaby,
+          }, {
+            label: "lge",
+            fill: false,
+            backgroundColor: '#000080',
+            borderColor: 'rgb(190, 99, 255)',
+            data: dataBaby2,
+          }]
+    };
+
+
 // Default chart defined with type: 'line'
 Chart.defaults.global.defaultFontFamily = "monospace";
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'pie',
     data: myData
 });
 
 // Function runs on chart type select update
 function updateChartType() {
   // Since you can't update chart type directly in Charts JS you must destroy original chart and rebuild
+  if (document.getElementById("chartType").value == "radar") {
    myChart.destroy();
    myChart = new Chart(ctx, {
      type: document.getElementById("chartType").value,
-     data: myData,
+     data: myData2
+    
    });
+
+}else if (document.getElementById("chartType").value == "doughnut"){
+
+     myChart.destroy();
+   myChart = new Chart(ctx, {
+     type: document.getElementById("chartType").value,
+     data: myData
+    
+   });
+}else if (document.getElementById("chartType").value == "bar"){
+
+     myChart.destroy();
+   myChart = new Chart(ctx, {
+     type: document.getElementById("chartType").value,
+     data: myData3
+    
+   });
+}
+
 };
 
-// Randomize data button function
-function randomizeData() {
-  let newDataBaby = dataBaby.map(x => Math.floor(Math.random() * 50));
-  let newMoreDataBaby = moreDataBaby.map(x => Math.floor(Math.random() * 40));
-  myData.datasets[0].data = newDataBaby
-  myData.datasets[1].data = newMoreDataBaby
-  myChart.update();
-  console.log(newDataBaby);
-};
+
+
+
+
+
+
+
+
+
+
 
 
 
