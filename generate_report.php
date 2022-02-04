@@ -92,9 +92,8 @@
 
 <script type="text/javascript">
     // Define data set for all charts
-let dataBaby = [1, 2];
-let dataBaby2 = [1, 2];
-
+let dataBaby = [0, 0];
+let dataBaby2 = [0, 0];
 myData = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -105,7 +104,7 @@ myData = {
             borderColor: 'rgb(190, 99, 255)',
             data: dataBaby,
           }, {
-            label: "Data, baby!",
+            label: "Data, baby!2",
             fill: false,
             backgroundColor: 'rgb(190, 99, 255, 0.25)',
             borderColor: 'rgb(190, 99, 255)',
@@ -153,11 +152,11 @@ function salesTracker(){
 }
 
 const coffeesales2 = document.getElementById('coffeesales2')
-coffeesales2.addEventListener('change', salesTracker)
-function salesTracker(){
+coffeesales2.addEventListener('change', salesTracker2)
+function salesTracker2(){
     console.log(coffeesales2.value)
     coffeesales2.value.split(',')
-    myChart.data.datasets[0].data = coffeesales2.value.split(',')
+    myChart.data.datasets[1].data = coffeesales2.value.split(',')
     myChart.update()
 }
 
